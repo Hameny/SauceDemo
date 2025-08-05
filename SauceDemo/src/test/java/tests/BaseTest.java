@@ -7,10 +7,14 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
 import java.util.HashMap;
+import pages.LoginPage;
+import pages.ProductsPage;
 
 public class BaseTest {
 
   WebDriver driver;
+  LoginPage loginPage;
+  ProductsPage productsPage;
 
   @BeforeMethod
   public void setup() {
@@ -26,6 +30,9 @@ public class BaseTest {
     options.addArguments("--disable-notification");//убрать уведомленияя
     options.addArguments("--headless");//без открытия интерфейса
     driver = new ChromeDriver();
+
+    loginPage = new LoginPage(driver);
+    productsPage = new ProductsPage(driver);
   }
 
   @AfterMethod(alwaysRun = true)

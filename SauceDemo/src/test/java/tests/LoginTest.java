@@ -1,55 +1,43 @@
 package tests;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.testng.Assert;
+import static org.testng.Assert.assertEquals;
 import org.testng.annotations.Test;
 
 public class LoginTest extends BaseTest {
 
   @Test
   public void checkPositiveLogin() {
-    driver.get("https://www.saucedemo.com/");
-    driver.findElement(By.id("user-name")).sendKeys("standard_user");
-    driver.findElement(By.name("password")).sendKeys("secret_sauce");
-    driver.findElement(By.id("login-button")).click();
-    WebElement productsTitle = driver.findElement(By.xpath("//*[contains(text(), 'Products')]"));
-    String titleText = productsTitle.getText();
-    Assert.assertTrue(titleText.contains("Products"), "Title does not contain 'Products'");
+    loginPage.open();
+    loginPage.login("standard_user", "secret_sauce");
+    assertEquals(productsPage.getTitle(),
+        "Products",
+        "Логин не выполнен");
   }
 
   @Test
   public void checkNegativetestWithoutPassword() {
-    driver.get("https://www.saucedemo.com/");
-    driver.findElement(By.id("user-name")).sendKeys("standard_user");
-    driver.findElement(By.name("password")).sendKeys("");
-    driver.findElement(By.id("login-button")).click();
-    String errorContainer = driver.findElement(By.className("error-message-container")).getText();
-
-    Assert.assertEquals(errorContainer, "Epic sadface: Password is required");
+    loginPage.open();
+    loginPage.login("standard_user", "");
+    assertEquals(loginPage.getErrorMessage(),
+        "Epic sadface: Password is required",
+        "Сообщение об ошибке не соответствует");
   }
 
   @Test
   public void checkNegativetestWithoutLogin() {
-    driver.get("https://www.saucedemo.com/");
-    driver.findElement(By.id("user-name")).sendKeys("");
-    driver.findElement(By.name("password")).sendKeys("secret_sauce");
-    driver.findElement(By.id("login-button")).click();
-    String errorContainer = driver.findElement(By.className("error-message-container")).getText();
-
-    Assert.assertEquals(errorContainer, "Epic sadface: Username is required");
+    loginPage.open();
+    loginPage.login("", "secret_sauce");
+    assertEquals(loginPage.getErrorMessage(),
+        "Epic sadface: Username is required",
+        "Сообщение об ошибке не соответствует");
   }
 
   @Test
   public void checkNegativetestWithOtherLoginAndPassword() {
-    driver.get("https://www.saucedemo.com/");
-    driver.findElement(By.id("user-name")).sendKeys("test");
-    driver.findElement(By.name("password")).sendKeys("test");
-    driver.findElement(By.id("login-button")).click();
-    String errorContainer = driver.findElement(By.className("error-message-container")).getText();
-
-    Assert.assertEquals(errorContainer,
-        "Epic sadface: Username and password do not match any user in this service");
+    loginPage.open();
+    loginPage.login("Test", "Test");
+    assertEquals(loginPage.getErrorMessage(),
+        "Epic sadface: Username and password do not match any user in this service",
+        "Сообщение об ошибке не соответствует");
   }
-
 }
