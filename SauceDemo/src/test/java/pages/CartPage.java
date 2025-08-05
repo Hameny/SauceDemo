@@ -13,9 +13,5 @@ public class CartPage extends BasePage {
     driver.get(BASE_URL + "inventory.html");
   }
 
-  public void addToCard(String product) {
-    driver.findElement(By.xpath("//div[text()='" + product + "']" +
-        "/ancestor::div[@class='inventory_item']"
-        + "//div[@data-test='inventory-item-price']")).click();
-  }
+
 }
