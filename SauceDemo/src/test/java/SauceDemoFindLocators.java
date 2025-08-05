@@ -1,10 +1,10 @@
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
-public class SauceDemoFindLocators extends BaseClass {
+public class SauceDemoFindLocators extends BaseTest {
 
   @Test
-  public void searchLocators() {
+  public void searchLocatorsTest() {
 
     driver.get("https://www.saucedemo.com/");
 

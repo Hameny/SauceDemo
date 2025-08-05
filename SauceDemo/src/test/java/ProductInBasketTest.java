@@ -3,10 +3,10 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 
-public class ProductInBasket extends BaseClass {
+public class ProductInBasketTest extends BaseTest {
 
   @Test
-  public void checkCart() {
+  public void checkCartTest() {
 
     driver.get("https://www.saucedemo.com/");
     driver.findElement(By.id("user-name")).sendKeys("standard_user");

@@ -6,7 +6,7 @@ import org.testng.annotations.BeforeMethod;
 
 import java.util.HashMap;
 
-public class BaseClass {
+public class BaseTest {
 
   WebDriver driver;
 
