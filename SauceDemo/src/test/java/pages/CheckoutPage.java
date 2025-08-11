@@ -5,9 +5,10 @@ import org.openqa.selenium.WebDriver;
 
 public class CheckoutPage extends BasePage {
 
-  private final By FIRST_NAME_INPUT = By.xpath("//input[@data-test = 'firstName']");
-  private final By LAST_NAME_INPUT = By.xpath("//input[@data-test = 'lastName']");
-  private final By ZIP_CODE_INPUT = By.xpath("//input[@data-test = 'postalCode']");
+  private final By FIRST_NAME_INPUT = By.id("first-name");
+  private final By LAST_NAME_INPUT = By.id("last-name");
+  private final By ZIP_CODE_INPUT = By.id("postal-code");
+
   private final By CONTINUE_BUTTON = By.xpath("//input[@data-test = 'continue']");
   private final By TITLE_OVERVIEW = By.xpath("//span[text() = 'Checkout: Overview']");
   private final By ERROR_MESSAGE = By.xpath("//h3[@data-test = 'error']");

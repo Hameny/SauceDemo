@@ -10,9 +10,9 @@ public class CartPage extends BasePage {
   private final By DESCRIPTION_CART_LABEL = By.cssSelector(".cart_desc_label");
   private final By CONTINUE_SHOPPING_BUTTON = By.id("continue-shopping");
   private final By CHECKOUT_BUTTON = By.id("checkout");
-  private final String DESCRIPTION_PATTERN = "//div[text() = '%s']/ancestor::div[@class = 'cart_item']//div[@class='inventory_item_desc']";
-  private final String PRICE_PATTERN = "//div[text() = '%s']/ancestor::div[@class = 'cart_item']//div[@class='inventory_item_price']";
+  private final String PRODUCT_PRICE = "//*[text() = '%s']/ancestor::div[@class='cart_item']//*[@class='inventory_item_price']";
   private final String REMOVE_BUTTON_PATTERN = "//div[text() = '%s']/ancestor::div[@class = 'cart_item']//button";
+  private final String PRODUCT_NAME = "//div[text() = '%s']";
 
   public CartPage(WebDriver driver) {
     super(driver);
@@ -35,14 +35,14 @@ public class CartPage extends BasePage {
     return driver.findElement(DESCRIPTION_CART_LABEL).getText();
   }
 
-  public String getProductDescription(String product) {
-    By productDescription = By.xpath(String.format(DESCRIPTION_PATTERN, product));
-    return driver.findElement(productDescription).getText();
+  public String getProductName(String product) {
+    return driver.findElement(By.xpath(String.format(PRODUCT_NAME, product))).getText();
   }
 
   public String getProductPrice(String product) {
-    By productPrice = By.xpath(String.format(PRICE_PATTERN, product));
-    return driver.findElement(productPrice).getText();
+    String xpath = String.format(PRODUCT_PRICE, product);
+    String priceText = driver.findElement(By.xpath(xpath)).getText().replace("$", "");
+    return priceText;
   }
 
   public void clickContinueShopping() {
