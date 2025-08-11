@@ -8,14 +8,11 @@ public class CheckoutPage extends BasePage {
   private final By FIRST_NAME_INPUT = By.id("first-name");
   private final By LAST_NAME_INPUT = By.id("last-name");
   private final By ZIP_CODE_INPUT = By.id("postal-code");
-
   private final By CONTINUE_BUTTON = By.xpath("//input[@data-test = 'continue']");
   private final By TITLE_OVERVIEW = By.xpath("//span[text() = 'Checkout: Overview']");
   private final By ERROR_MESSAGE = By.xpath("//h3[@data-test = 'error']");
-  private final String PATTERN_PRODUCT_NAME = "//div[text() = '%s']";
-  private final String PATTERN_PRODUCT_PRICE =
-      "//div[text() = '%s']/ancestor::div[@class = 'cart_item']" +
-          "//div[@class = 'inventory_item_price']";
+  private final String PRODUCT_NAME = "//div[text() = '%s']";
+  private final String PRODUCT_PRICE = "//*[text() = '%s']/ancestor::div[@class='cart_item']//*[@class='inventory_item_price']";
   private final By TOTAL_PRODUCT_PRICE = By.xpath("//div[@class = 'summary_total_label']");
   private final By COMPLETE_MESSAGE = By.xpath("//h2[@class = 'complete-header']");
 
@@ -32,11 +29,13 @@ public class CheckoutPage extends BasePage {
   }
 
   public String getProductName(String product) {
-    return driver.findElement(By.xpath(String.format(PATTERN_PRODUCT_NAME, product))).getText();
+    return driver.findElement(By.xpath(String.format(PRODUCT_NAME, product))).getText();
   }
 
   public String getProductPrice(String product) {
-    return driver.findElement(By.xpath(String.format(PATTERN_PRODUCT_PRICE, product))).getText();
+    String xpath = String.format(PRODUCT_PRICE, product);
+    String priceText = driver.findElement(By.xpath(xpath)).getText().replace("$", "");
+    return priceText;
   }
 
   public String getTotalPrice() {
