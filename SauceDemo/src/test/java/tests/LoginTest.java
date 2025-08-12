@@ -40,4 +40,13 @@ public class LoginTest extends BaseTest {
         "Epic sadface: Username and password do not match any user in this service",
         "Сообщение об ошибке не соответствует");
   }
+
+  @Test
+  public void paramTest(){
+    loginPage.open();
+    loginPage.login(user, password);
+    assertEquals(loginPage.getErrorMessage(),
+        "Epic sadface: Username and password do not match any user in this service",
+        "Сообщение об ошибке не соответствует");
+  }
 }
