@@ -30,7 +30,6 @@ public class CartPage extends BasePage {
     return driver.findElement(QUANTITY_CART_LABEL).getText();
   }
 
-
   public String getDescriptionCartLabel() {
     return driver.findElement(DESCRIPTION_CART_LABEL).getText();
   }
@@ -57,6 +56,4 @@ public class CartPage extends BasePage {
     By removingProduct = By.xpath(String.format(REMOVE_BUTTON_PATTERN, product));
     driver.findElement(removingProduct).click();
   }
-
-
 }

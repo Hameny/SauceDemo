@@ -10,7 +10,6 @@ public class CheckoutTest extends BaseTest{
   public String firstName = "Pavel";
   public String lastName = "Hameny";
   public String zipcode = "220000";
-  SoftAssert softAssert = new SoftAssert();
 
   @Test
   public void checkEnterFullInformation() {
@@ -35,6 +34,4 @@ public class CheckoutTest extends BaseTest{
         "Thank you for your order!",
         "Не правильное сообщение");
   }
-
-
 }
