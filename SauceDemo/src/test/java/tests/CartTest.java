@@ -3,7 +3,6 @@ package tests;
 import static org.testng.Assert.assertEquals;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -13,7 +12,11 @@ public class CartTest extends BaseTest {
   String productTwo = "Sauce Labs Fleece Jacket";
   SoftAssert softAssert = new SoftAssert();
 
-  @Test
+  @Test(priority = 2,
+      invocationCount = 2,
+      description = "Проверка добавления товара в корзину",
+      testName = "Позитивный тест.Проверка добавления товара в корзину",
+      groups = {"smoke"})
   public void checkAddProductToCart() {
     loginPage.open();
     loginPage.login("standard_user", "secret_sauce");
@@ -23,7 +26,11 @@ public class CartTest extends BaseTest {
     assertEquals(productInCart, "Sauce Labs Onesie", "Наименование продукта не совпало");
   }
 
-  @Test
+  @Test(priority = 2,
+      invocationCount = 2,
+      description = "Проверка добавления  2-х товаров в корзину",
+      testName = "Позитивный тест.Проверка добавления  2-х товаров в корзину",
+      groups = {"smoke"})
   public void checkAddTwoProductToCart() {
     loginPage.open();
     loginPage.login("standard_user", "secret_sauce");
@@ -43,7 +50,11 @@ public class CartTest extends BaseTest {
     softAssert.assertAll();
   }
 
-  @Test
+  @Test(priority = 2,
+      invocationCount = 2,
+      description = "Проверка Checkout при попадании в корзину",
+      testName = "Позитивный тест.Проверка Checkout при попадании в корзину",
+      groups = {"smoke"})
   void checkProceedToCheckoutFromCart() {
     loginPage.open();
     loginPage.login("standard_user", "secret_sauce");

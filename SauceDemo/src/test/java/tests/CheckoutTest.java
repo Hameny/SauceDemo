@@ -3,7 +3,6 @@ package tests;
 import static org.testng.Assert.assertEquals;
 
 import org.testng.annotations.Test;
-import org.testng.asserts.SoftAssert;
 
 public class CheckoutTest extends BaseTest{
 
@@ -11,7 +10,11 @@ public class CheckoutTest extends BaseTest{
   public String lastName = "Hameny";
   public String zipcode = "220000";
 
-  @Test
+  @Test(priority = 1,
+      invocationCount = 2,
+      description = "Проверка ввода всей информации в поле Имя,Фамилия,Почтовый индекс",
+      testName = "Позитивный тест.Проверка ввода всей информации",
+      groups = {"smoke"})
   public void checkEnterFullInformation() {
     loginPage.open();
     loginPage.login("standard_user", "secret_sauce");
@@ -20,8 +23,11 @@ public class CheckoutTest extends BaseTest{
     checkoutPage.clickToButtonContinue();
     assertEquals(checkoutPage.getTitleOverview(), "Checkout: Overview", "Incorrect text");
   }
-
-  @Test
+  @Test(priority = 1,
+      invocationCount = 2,
+      description = "Проверка выполнения заказа",
+      testName = "Позитивный тест.Проверка выполнения заказа",
+      groups = {"smoke"})
   public void CheckCompleteCheckout() {
     loginPage.open();
     loginPage.login("standard_user", "secret_sauce");

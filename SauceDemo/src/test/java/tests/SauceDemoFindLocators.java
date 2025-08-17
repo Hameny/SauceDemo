@@ -5,11 +5,11 @@ import org.testng.annotations.Test;
 
 public class SauceDemoFindLocators extends BaseTest {
 
-  @Test
+  @Test(testName = "Проверка локаторов",
+      description = "Проверка локаторов",
+      groups = {"smoke"})
   public void searchLocatorsTest() {
-
     driver.get("https://www.saucedemo.com/");
-
     driver.findElement(By.id("user-name"));
     driver.findElement(By.id("login-button"));
     driver.findElement(By.id("password"));
