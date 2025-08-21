@@ -2,6 +2,7 @@ package tests;
 
 import static org.testng.Assert.assertEquals;
 
+import io.qameta.allure.*;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -12,6 +13,16 @@ public class LoginTest extends BaseTest {
       description = "Проверка входа в систему с валидными данными",
       testName = "Позитивный тест.Вход в систему с валидными данными",
       groups = {"smoke"})
+  @Description("Проверка входа в систему с валидными данными")//Allure
+  @Owner("PavelHameny")//Создатель теста
+  @Link("123")//ссылка на доку
+  @Epic("Логин пйдж")
+  @Feature("Log in")
+  @Story("Проверка входа в систему с валидными данными")
+  @Severity(SeverityLevel.CRITICAL)
+  @Lead("PavelH")
+  @TmsLink("")//ссылка на тест-кейс
+  @Issue("")//ссылка на баг репорт
   public void checkPositiveLogin() {
     loginPage.open();
     loginPage.login("standard_user", "secret_sauce");
@@ -26,11 +37,13 @@ public class LoginTest extends BaseTest {
       description = "Проверка входа в систему без пароля",
       testName = "Негативный тест.Вход в систему без пароля",
       groups = {"smoke"})
+  @Description("Проверка входа в систему без пароля")//Allure
+  @Owner("PavelHameny")//Создатель теста
   public void checkNegativetestWithoutPassword() {
     loginPage.open();
     loginPage.login("standard_user", "");
     assertEquals(loginPage.getErrorMessage(),
-        "Epic sadface: Password is required",
+        "Epic sadface: Password is required!!",
         "Сообщение об ошибке не соответствует");
   }
 
@@ -39,6 +52,8 @@ public class LoginTest extends BaseTest {
       description = "Проверка входа в систему без логина",
       testName = "Негативный тест.Вход в систему без логина",
       groups = {"smoke"})
+  @Description("Проверка входа в систему без логина")
+  @Owner("PavelHameny")
   public void checkNegativetestWithoutLogin() {
     loginPage.open();
     loginPage.login("", "secret_sauce");
@@ -52,6 +67,8 @@ public class LoginTest extends BaseTest {
       description = "Проверка входа в систему без логина и  пароля",
       testName = "Негативный тест.Вход в систему без логина и пароля",
       groups = {"smoke"})
+  @Description("Проверка входа в систему без логина и  пароля")
+  @Owner("PavelHameny")
   public void checkNegativetestWithOtherLoginAndPassword() {
     loginPage.open();
     loginPage.login("Test", "Test");
@@ -74,6 +91,8 @@ public class LoginTest extends BaseTest {
       groups = {"smoke"},
       description = "Проверка получения сообщений при различных способах входа",
       testName = "Негативный тест логина")
+  @Description("Проверка получения сообщений при различных способах входа")
+  @Owner("PavelHameny")
   public void checkLoginWithNegativeValue1(String user, String password, String expectedMessage) {
     loginPage.open();
     loginPage.login(user, password);

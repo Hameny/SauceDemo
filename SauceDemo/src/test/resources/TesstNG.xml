@@ -3,7 +3,7 @@
 <suite name="SauceDemo TestRetry">
 
   <listeners>
-    <listener class-name="tests.TestListener"/>
+    <listener class-name="tests.AnnotationTransformer"/>
   </listeners>
 
   <test name="Thread#1">

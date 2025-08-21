@@ -1,5 +1,7 @@
 package tests;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.Owner;
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
@@ -12,6 +14,8 @@ public class ProductInBasketTest extends BaseTest {
       description = "Проверка наименования товара и стоимости в корзине и при добавлении в корзину",
       testName = "Позитивный тест.Проверка наименования товара и стоимости в корзине и при добавлении в корзину",
       groups = {"smoke"})
+  @Description("Проверка наименования товара и стоимости в корзине и при добавлении в корзину")
+  @Owner("PavelHameny")
   public void checkCartTest() {
     driver.get("https://www.saucedemo.com/");
     driver.findElement(By.id("user-name")).sendKeys("standard_user");

@@ -1,5 +1,7 @@
 package tests;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.Owner;
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
@@ -8,6 +10,8 @@ public class SauceDemoFindLocators extends BaseTest {
   @Test(testName = "Проверка локаторов",
       description = "Проверка локаторов",
       groups = {"smoke"})
+  @Description("Проверка локаторов")
+  @Owner("PavelHameny")
   public void searchLocatorsTest() {
     driver.get("https://www.saucedemo.com/");
     driver.findElement(By.id("user-name"));
@@ -34,7 +38,8 @@ public class SauceDemoFindLocators extends BaseTest {
     driver.findElement(By.xpath("//div[@class='inventory_item'][1]/following::div[2]"));
     driver.findElement(By.xpath("//span[@class='select_container']/parent::div"));
     driver.findElement(By.xpath("//span[@class='select_container']/preceding::div[1]"));
-    driver.findElement(By.xpath("//div[@class='inventory_item' and @data-test='inventory-item'][1]"));
+    driver.findElement(
+        By.xpath("//div[@class='inventory_item' and @data-test='inventory-item'][1]"));
 
     //CSS
     driver.findElement(By.cssSelector(".shopping_cart_link"));
