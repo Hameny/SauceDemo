@@ -16,7 +16,7 @@ public class LoginTest extends BaseTest {
   @Description("Проверка входа в систему с валидными данными")//Allure
   @Owner("PavelHameny")//Создатель теста
   @Link("123")//ссылка на доку
-  @Epic("Логин пйдж")
+  @Epic("Логин пейдж")
   @Feature("Log in")
   @Story("Проверка входа в систему с валидными данными")
   @Severity(SeverityLevel.CRITICAL)
@@ -24,8 +24,9 @@ public class LoginTest extends BaseTest {
   @TmsLink("")//ссылка на тест-кейс
   @Issue("")//ссылка на баг репорт
   public void checkPositiveLogin() {
-    loginPage.open();
-    loginPage.login("standard_user", "secret_sauce");
+    loginPage.open()
+        .isPageOpened()
+        .login("standard_user", "secret_sauce");
     assertEquals(productsPage.getTitle(),
         "Products",
         "Логин не выполнен");
@@ -40,8 +41,9 @@ public class LoginTest extends BaseTest {
   @Description("Проверка входа в систему без пароля")//Allure
   @Owner("PavelHameny")//Создатель теста
   public void checkNegativetestWithoutPassword() {
-    loginPage.open();
-    loginPage.login("standard_user", "");
+    loginPage.open()
+        .isPageOpened()
+        .login("standard_user", "");
     assertEquals(loginPage.getErrorMessage(),
         "Epic sadface: Password is required!!",
         "Сообщение об ошибке не соответствует");
@@ -55,8 +57,9 @@ public class LoginTest extends BaseTest {
   @Description("Проверка входа в систему без логина")
   @Owner("PavelHameny")
   public void checkNegativetestWithoutLogin() {
-    loginPage.open();
-    loginPage.login("", "secret_sauce");
+    loginPage.open()
+        .isPageOpened()
+        .login("", "secret_sauce");
     assertEquals(loginPage.getErrorMessage(),
         "Epic sadface: Username is required",
         "Сообщение об ошибке не соответствует");
@@ -70,8 +73,9 @@ public class LoginTest extends BaseTest {
   @Description("Проверка входа в систему без логина и  пароля")
   @Owner("PavelHameny")
   public void checkNegativetestWithOtherLoginAndPassword() {
-    loginPage.open();
-    loginPage.login("Test", "Test");
+    loginPage.open()
+        .isPageOpened()
+        .login("", "");
     assertEquals(loginPage.getErrorMessage(),
         "Epic sadface: Username and password do not match any user in this service",
         "Сообщение об ошибке не соответствует");
@@ -94,8 +98,9 @@ public class LoginTest extends BaseTest {
   @Description("Проверка получения сообщений при различных способах входа")
   @Owner("PavelHameny")
   public void checkLoginWithNegativeValue1(String user, String password, String expectedMessage) {
-    loginPage.open();
-    loginPage.login(user, password);
+    loginPage.open()
+        .isPageOpened()
+        .login(user, password);
     assertEquals(loginPage.getErrorMessage(),
         expectedMessage,
         "Сообщение не соответствует");

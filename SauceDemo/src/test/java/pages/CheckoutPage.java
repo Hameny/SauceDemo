@@ -1,12 +1,18 @@
 package pages;
 
 import io.qameta.allure.Step;
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.testng.Assert;
 
+@Log4j2
 public class CheckoutPage extends BasePage {
 
   private final By FIRST_NAME_INPUT = By.id("first-name");
+  private final By TITLE = By.xpath("//span[text()='Checkout: Your Information']");
   private final By LAST_NAME_INPUT = By.id("last-name");
   private final By ZIP_CODE_INPUT = By.id("postal-code");
   private final By CONTINUE_BUTTON = By.xpath("//input[@data-test = 'continue']");
@@ -23,11 +29,23 @@ public class CheckoutPage extends BasePage {
 
   @Step("Get complete message")
   public String getCompleteMessage() {
+    log.info("Get complete message");
     return driver.findElement(COMPLETE_MESSAGE).getText();
+  }
+
+  public CheckoutPage isPageOpened() {
+    try {
+      wait.until(ExpectedConditions.visibilityOfElementLocated(TITLE));
+    } catch (TimeoutException e) {
+      log.error(e.getMessage());
+      Assert.fail("Page isn't open");
+    }
+    return this;
   }
 
   @Step("Click button 'FINISH'")
   public void clickButtonFinish() {
+    log.info("Click button 'FINISH'");
     driver.findElement(By.xpath("//button[@id = 'finish']")).click();
   }
 
@@ -51,6 +69,7 @@ public class CheckoutPage extends BasePage {
 
   @Step("Get title Overview")
   public String getTitleOverview() {
+    log.info("Click button 'FINISH'");
     return driver.findElement(TITLE_OVERVIEW).getText();
   }
 
@@ -61,16 +80,19 @@ public class CheckoutPage extends BasePage {
 
   @Step("Open page 'Check out info'")
   public void openPageCheckOutInfo() {
+    log.info("Open page 'Check out info'");
     driver.get("https://www.saucedemo.com/checkout-step-one.html");
   }
 
   @Step("Open page 'ChecK out overview'")
   public void openPageCheckOutOverview() {
+    log.info("Open page 'ChecK out overview'");
     driver.get("https://www.saucedemo.com/checkout-step-two.html");
   }
 
   @Step("Click Button 'Continue'")
   public void clickToButtonContinue() {
+    log.info("Click Button 'Continue'");
     driver.findElement(CONTINUE_BUTTON).click();
   }
 

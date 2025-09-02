@@ -20,8 +20,9 @@ public class CheckoutTest extends BaseTest {
   @Description("Проверка ввода всей информации в поле Имя,Фамилия,Почтовый индекс")
   @Owner("PavelHameny")
   public void checkEnterFullInformation() {
-    loginPage.open();
-    loginPage.login("standard_user", "secret_sauce");
+    loginPage.open()
+        .isPageOpened()
+        .login("standard_user", "secret_sauce");
     checkoutPage.openPageCheckOutInfo();
     checkoutPage.inputFullInfo(firstName, lastName, zipcode);
     checkoutPage.clickToButtonContinue();
@@ -36,8 +37,9 @@ public class CheckoutTest extends BaseTest {
   @Description("Проверка выполнения заказа")
   @Owner("PavelHameny")
   public void CheckCompleteCheckout() {
-    loginPage.open();
-    loginPage.login("standard_user", "secret_sauce");
+    loginPage.open()
+        .isPageOpened()
+        .login("standard_user", "secret_sauce");
     productsPage.addToCard("Sauce Labs Onesie");
     checkoutPage.openPageCheckOutInfo();
     checkoutPage.inputFullInfo(firstName, lastName, zipcode);
@@ -45,6 +47,6 @@ public class CheckoutTest extends BaseTest {
     checkoutPage.clickButtonFinish();
     assertEquals(checkoutPage.getCompleteMessage(),
         "Thank you for your order!",
-        "Не правильное сообщение");
+        "Incorrect text");
   }
 }
