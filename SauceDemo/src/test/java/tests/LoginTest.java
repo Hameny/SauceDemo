@@ -77,7 +77,7 @@ public class LoginTest extends BaseTest {
         .isPageOpened()
         .login("", "");
     assertEquals(loginPage.getErrorMessage(),
-        "Epic sadface: Username and password do not match any user in this service",
+        "Epic sadface: Username is required",
         "Сообщение об ошибке не соответствует");
   }
 
