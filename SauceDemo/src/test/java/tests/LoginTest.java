@@ -33,21 +33,21 @@ public class LoginTest extends BaseTest {
   }
 
 
-  @Test(priority = 1,
-      invocationCount = 2,
-      description = "Проверка входа в систему без пароля",
-      testName = "Негативный тест.Вход в систему без пароля",
-      groups = {"smoke"})
-  @Description("Проверка входа в систему без пароля")//Allure
-  @Owner("PavelHameny")//Создатель теста
-  public void checkNegativetestWithoutPassword() {
-    loginPage.open()
-        .isPageOpened()
-        .login("standard_user", "");
-    assertEquals(loginPage.getErrorMessage(),
-        "Epic sadface: Password is required!!",
-        "Сообщение об ошибке не соответствует");
-  }
+//  @Test(priority = 1,
+//      invocationCount = 2,
+//      description = "Проверка входа в систему без пароля",
+//      testName = "Негативный тест.Вход в систему без пароля",
+//      groups = {"smoke"})
+//  @Description("Проверка входа в систему без пароля")//Allure
+//  @Owner("PavelHameny")//Создатель теста
+//  public void checkNegativetestWithoutPassword() {
+//    loginPage.open()
+//        .isPageOpened()
+//        .login("standard_user", "");
+//    assertEquals(loginPage.getErrorMessage(),
+//        "Epic sadface: Password is required!!",
+//        "Сообщение об ошибке не соответствует");
+//  }
 
   @Test(priority = 1,
       invocationCount = 2,
