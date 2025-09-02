@@ -67,6 +67,8 @@ public class BaseTest {
     if (result.getStatus() == ITestResult.FAILURE) {
       takeScreenshot(driver);
   }
-    driver.quit();
+    if(driver != null) {
+      driver.quit();
+    }
   }
 }
