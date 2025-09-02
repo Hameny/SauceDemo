@@ -22,13 +22,18 @@ public class LoginPageFactory extends BasePage {
     super(driver);
   }
 
+  @Override
+  public BasePage isPageOpened() {
+    return null;
+  }
+
   public void open() {
     driver.get(BASE_URL);
   }
 
-  public void isPageOpened() {
-    wait.until(ExpectedConditions.visibilityOfElement(buttonLogin));
-  }
+  //public void isPageOpened() {
+//    wait.until(ExpectedConditions.visibilityOfElement(buttonLogin));
+//  }
 
   public void login(String user, String password) {
     driver.findElement(LOGIN_FIELD).sendKeys(user);
