@@ -21,3 +21,4 @@ jobs:
         cache: maven
     - name: Run tests
       run: mvn clean test
+      working-directory: ./SauceDemo
