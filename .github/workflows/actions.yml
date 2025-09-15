@@ -12,7 +12,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: SauceDemo/SauceDemo  # Укажите правильный путь к вашей директории
+        working-directory: ./SauceDemo/SauceDemo  # Укажите правильный путь к вашей директории
 
     steps:
       - name: Checkout code
