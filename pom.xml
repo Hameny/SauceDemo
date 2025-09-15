@@ -18,6 +18,7 @@
     <log4j.version>2.20.0</log4j.version>
     <allure.version>2.24.0</allure.version>
     <log4j-core>2.25.1</log4j-core>
+    <lombok>1.18.38</lombok>
     <aspectj.version>1.9.20.1</aspectj.version>
   </properties>
 
@@ -68,6 +69,11 @@
       <artifactId>allure-testng</artifactId>
       <version>${allure.version}</version>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>${lombok}</version>
     </dependency>
     <dependency>
       <groupId>org.aspectj</groupId>
