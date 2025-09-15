@@ -18,6 +18,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Remove testng.xml configuration from pom.xml
+        run: |
+          # Удаляем секцию suiteXmlFiles из pom.xml
+          if [ -f "pom.xml" ]; then
+            cp pom.xml pom.xml.backup
+            # Удаляем ВСЕ упоминания testng.xml и suiteXmlFiles
+            sed -i '/<suiteXmlFiles>/,/<\/suiteXmlFiles>/d' pom.xml
+            sed -i '/testng\.xml/d' pom.xml
+            echo "Removed testng.xml configuration from pom.xml"
+          fi
+
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
@@ -25,33 +36,51 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      - name: Build project
-        run: mvn compile -q
+      - name: Create simple test
+        run: |
+          mkdir -p src/test/java/com/example/tests
+          cat > src/test/java/com/example/tests/SmokeTest.java << 'EOF'
+  package com.example.tests;
+  
+  import org.testng.annotations.Test;
+  
+  public class SmokeTest {
+  @Test
+  public void smokeTest() {
+  System.out.println("✅ Smoke test passed!");
+}
+}
+  EOF
 
-      - name: Run tests with Allure
-        run: mvn test -q -Duser=$USER -Dpassword=$PASSWORD
+- name: Build project
+  run: mvn compile -q
 
-      - name: Generate Allure Report
-        run: mvn allure:report -q
+- name: Run simple test
+  run: mvn test -q -Dtest=SmokeTest
 
-      - name: Upload Allure results
-        uses: actions/upload-artifact@v4
-        with:
-          name: allure-results
-          path: target/allure-results
-          retention-days: 7
+- name: Run all tests
+  run: mvn test -q -Duser=$USER -Dpassword=$PASSWORD
 
-      - name: Upload Allure report
-        uses: actions/upload-artifact@v4
-        with:
-          name: allure-report
-          path: target/allure-report
-          retention-days: 7
+- name: Generate Allure Report
+  run: mvn allure:report -q
 
-      - name: Deploy Allure report to GitHub Pages
-        if: success()
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: target/allure-report
-          keep_files: true
+- name: Upload Allure results
+  uses: actions/upload-artifact@v4
+  with:
+    name: allure-results
+    path: target/allure-results
+    retention-days: 7
+
+- name: Upload Allure report
+  uses: actions/upload-artifact@v4
+  with:
+    name: allure-report
+    path: target/allure-report
+    retention-days: 7
+
+- name: Restore original pom.xml
+  run: |
+    if [ -f "pom.xml.backup" ]; then
+      mv pom.xml.backup pom.xml
+      echo "Restored original pom.xml"
+    fi

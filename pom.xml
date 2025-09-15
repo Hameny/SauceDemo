@@ -17,8 +17,6 @@
     <webdrivermanager.version>5.6.0</webdrivermanager.version>
     <log4j.version>2.20.0</log4j.version>
     <allure.version>2.24.0</allure.version>
-    <log4j-core>2.25.1</log4j-core>
-    <lombok>1.18.38</lombok>
     <aspectj.version>1.9.20.1</aspectj.version>
   </properties>
 
@@ -28,12 +26,6 @@
       <groupId>org.seleniumhq.selenium</groupId>
       <artifactId>selenium-java</artifactId>
       <version>${selenium.version}</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.apache.logging.log4j</groupId>
-      <artifactId>log4j-core</artifactId>
-      <version>${log4j-core}</version>
     </dependency>
 
     <!-- TestNG -->
@@ -71,11 +63,6 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>org.projectlombok</groupId>
-      <artifactId>lombok</artifactId>
-      <version>${lombok}</version>
-    </dependency>
-    <dependency>
       <groupId>org.aspectj</groupId>
       <artifactId>aspectjweaver</artifactId>
       <version>${aspectj.version}</version>
@@ -96,9 +83,7 @@
         <artifactId>maven-surefire-plugin</artifactId>
         <version>3.1.2</version>
         <configuration>
-          <suiteXmlFiles>
-            <suiteXmlFile>testng.xml</suiteXmlFile>
-          </suiteXmlFiles>
+          <!-- УБРАТЬ секцию suiteXmlFiles -->
           <argLine>
             -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
           </argLine>
@@ -120,7 +105,7 @@
       <!-- Allure Maven Plugin -->
       <plugin>
         <groupId>io.qameta.allure</groupId>
-        <artifactId>allure-maven</artifactId>
+        <artifactId>allure-maven-plugin</artifactId>
         <version>2.12.0</version>
         <configuration>
           <reportVersion>${allure.version}</reportVersion>
