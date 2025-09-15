@@ -16,6 +16,7 @@
     <testng.version>7.8.0</testng.version>
     <webdrivermanager.version>5.6.0</webdrivermanager.version>
     <log4j.version>2.20.0</log4j.version>
+    <lombok>1.18.38</lombok>
     <allure.version>2.24.0</allure.version>
     <aspectj.version>1.9.20.1</aspectj.version>
   </properties>
@@ -26,6 +27,11 @@
       <groupId>org.seleniumhq.selenium</groupId>
       <artifactId>selenium-java</artifactId>
       <version>${selenium.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>${lombok}</version>
     </dependency>
 
     <!-- TestNG -->
@@ -105,7 +111,7 @@
       <!-- Allure Maven Plugin -->
       <plugin>
         <groupId>io.qameta.allure</groupId>
-        <artifactId>allure-maven-plugin</artifactId>
+        <artifactId>allure-maven</artifactId>
         <version>2.12.0</version>
         <configuration>
           <reportVersion>${allure.version}</reportVersion>
