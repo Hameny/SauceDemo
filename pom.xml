@@ -17,6 +17,7 @@
     <webdrivermanager.version>5.6.0</webdrivermanager.version>
     <log4j.version>2.20.0</log4j.version>
     <allure.version>2.24.0</allure.version>
+    <log4j-core>2.25.1</log4j-core>
     <aspectj.version>1.9.20.1</aspectj.version>
   </properties>
 
@@ -26,6 +27,12 @@
       <groupId>org.seleniumhq.selenium</groupId>
       <artifactId>selenium-java</artifactId>
       <version>${selenium.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-core</artifactId>
+      <version>${log4j-core}</version>
     </dependency>
 
     <!-- TestNG -->
