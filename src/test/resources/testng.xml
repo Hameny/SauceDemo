@@ -1,32 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="SauceDemo TestRetry">
-
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="SauceDemo Test Suite" verbose="1">
   <listeners>
-    <listener class-name="tests.AnnotationTransformer"/>
+    <listener class-name="io.qameta.allure.testng.AllureTestNg" />
   </listeners>
-
-  <test name="Thread#1">
-    <groups>
-      <run>
-        <include name="smoke"/>
-      </run>
-    </groups>
+  <test name="SauceDemo Tests">
     <classes>
-      <class name="tests.LoginTest"/>
-      <class name="tests.CartTest"/>
-      <class name="tests.SauceDemoFindLocators"/>
-    </classes>
-  </test>
-  <test name="Thread#2">
-    <groups>
-      <run>
-        <include name="smoke"/>
-      </run>
-    </groups>
-    <classes>
-      <class name="tests.CartTest"/>
-      <class name="tests.SauceDemoFindLocators"/>
+      <class name="tests.LogTest" />
+      <class name="tests.LoginTest" />
     </classes>
   </test>
 </suite>
