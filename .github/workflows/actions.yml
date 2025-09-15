@@ -7,12 +7,8 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
-
-    defaults:
-      run:
-        working-directory: ./SauceDemo/SauceDemo  # Укажите правильный путь к вашей директории
 
     steps:
       - name: Checkout code
@@ -21,13 +17,16 @@ jobs:
       - name: Verify project structure
         run: |
           echo "Current directory: $(pwd)"
-          echo "Files in directory:"
+          echo "Files in root directory:"
           ls -la
-          echo "Checking for pom.xml in SauceDemo/:"
-          if [ -f "SauceDemo/pom.xml" ]; then
-            echo "✅ pom.xml found!"
+          echo "Checking for pom.xml:"
+          if [ -f "pom.xml" ]; then
+            echo "✅ pom.xml found in root!"
+            cat pom.xml | head -10
           else
-            echo "❌ pom.xml not found!"
+            echo "❌ pom.xml not found in root!"
+            echo "Searching for pom.xml in subdirectories:"
+            find . -name "pom.xml" -type f
             exit 1
           fi
 
@@ -41,7 +40,7 @@ jobs:
       - name: Build with Maven
         run: mvn compile -q
 
-      - name: Run tests with Allure
+      - name: Run tests
         run: mvn test -q -Duser=${{secrets.SD_USER}} -Dpassword=${{secrets.SD_PASSWORD}}
 
       - name: Generate Allure Report
@@ -51,12 +50,12 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: allure-results
-          path: SauceDemo/target/allure-results
+          path: target/allure-results
           retention-days: 7
 
       - name: Upload Allure report
         uses: actions/upload-artifact@v4
         with:
           name: allure-report
-          path: SauceDemo/target/allure-report
+          path: target/allure-report
           retention-days: 7
