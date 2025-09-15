@@ -18,17 +18,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Verify directory structure
+      - name: Verify project structure
         run: |
           echo "Current directory: $(pwd)"
           echo "Contents:"
           ls -la
-          echo "Checking SauceDemo directory:"
-          if [ -d "SauceDemo" ]; then
-            echo "✅ SauceDemo directory exists"
-            ls -la SauceDemo/
+          echo "Checking for pom.xml:"
+          if [ -f "pom.xml" ]; then
+            echo "✅ pom.xml found in root directory"
+            head -5 pom.xml
           else
-            echo "❌ SauceDemo directory not found"
+            echo "❌ pom.xml not found"
             exit 1
           fi
 
@@ -40,26 +40,26 @@ jobs:
           cache: maven
 
       - name: Build project
-        run: cd SauceDemo && mvn compile -q
+        run: mvn compile -q
 
       - name: Run tests with Allure
-        run: cd SauceDemo && mvn test -q -Duser=$USER -Dpassword=$PASSWORD
+        run: mvn test -q -Duser=$USER -Dpassword=$PASSWORD
 
       - name: Generate Allure Report
-        run: cd SauceDemo && mvn allure:report -q
+        run: mvn allure:report -q
 
       - name: Upload Allure results
         uses: actions/upload-artifact@v4
         with:
           name: allure-results
-          path: SauceDemo/target/allure-results
+          path: target/allure-results
           retention-days: 7
 
       - name: Upload Allure report
         uses: actions/upload-artifact@v4
         with:
           name: allure-report
-          path: SauceDemo/target/allure-report
+          path: target/allure-report
           retention-days: 7
 
       - name: Deploy Allure report to GitHub Pages
@@ -67,5 +67,5 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: SauceDemo/target/allure-report
+          publish_dir: target/allure-report
           keep_files: true
